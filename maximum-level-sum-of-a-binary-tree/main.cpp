@@ -14,15 +14,18 @@ public:
         : val(x), left(left), right(right) {}
 };
 
+class Solution {
+public:
 int maxLevelSum(TreeNode* root) {
     int ans = 1;
     queue<TreeNode*> q;
     q.push(root);
-    int maxSum = 0;
+    int maxSum = root->val;
     int level = 1;
     while (!q.empty()) {
         int sum = 0;
-        for (int i=0; i<q.size(); i++) {
+        int n = q.size();
+        for (int i=0; i<n; i++) {
             TreeNode* current = q.front();
             q.pop();
             sum += current->val;
@@ -31,12 +34,13 @@ int maxLevelSum(TreeNode* root) {
         }
         if (sum > maxSum) {
             maxSum = sum;
-            ans = min(level, ans);
+            ans = level;
         }
         level ++;
     }
     return ans;
 }
+};
 
 int main() {
 
