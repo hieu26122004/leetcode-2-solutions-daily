@@ -40,7 +40,7 @@ string decodeString(string str) {
 }
 
 int main() {
-
+    
 
     return 0;
 }
