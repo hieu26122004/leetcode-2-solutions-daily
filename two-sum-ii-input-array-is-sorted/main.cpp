@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 
@@ -26,8 +25,7 @@ public:
 };
 
 int main() {
-    vector<int> nums = { 3,30,34,5,9 };
-    string ans = largestNumber(nums);
+
 
     return 0;
 }
