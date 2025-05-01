@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1746083022 source:d:\cpp\leetcode-daily\duplicate-zeros\main.cpp
+	<iostream>
+	<vector>
+
