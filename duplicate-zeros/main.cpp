@@ -6,28 +6,29 @@ using namespace std;
     void duplicateZeros(vector<int>& nums) {
         int zeroCount = 0;
         int n = nums.size();
-        bool idk = false;
+        int last = n - 1;
         for (int i=0; i<n - zeroCount; i++) {
             if (nums[i] == 0) {
-                if (i == n - zeroCount) {
-                    idk = true;
-                }
                 zeroCount ++;
             }
+            if (nums[i] == 0 && i == n - zeroCount) {
+                zeroCount --;
+                nums[last] = 0;
+                last --;
+            }
         }
-        int i = n - 1;
-        int j = n - zeroCount - 1;
+        int j = last - zeroCount;
         for (j; j>=0; j--) {
             int val = nums[j];
-            nums[i --] = val;
+            nums[last --] = val;
             if (val == 0) {
-                nums[i --] = 0;
+                nums[last --] = 0;
             }
         }
     }
 
 int main() {
-    vector<int> test = { 8,4,5,0,0,0,0,7 };
+    vector<int> test = { 1,0,2,3,0,4,5,0 };
     duplicateZeros(test);
     for (int num: test) {
         cout << num << endl;
