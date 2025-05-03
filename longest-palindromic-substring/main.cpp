@@ -3,62 +3,34 @@
 
 using namespace std;
 
-/*
-
-bool isPalindromeString(string str, int start, int end) {
-    while (start < end) {
-        if (str[start] != str[end]) {
-            return false;
+class Solution {
+public:
+    pair<int, int> util(string& str, int left, int right) {
+        int n = str.length();
+        while (left >= 0 && right < n && str[left] == str[right]) {
+            left --;
+            right ++;
         }
-        start ++;
-        end --;
+        return { left + 1, right - left - 1 };
     }
-    return true;
-}
-
-string longestPalindrome(string str) {
-    int length = str.length();
-
-    for (int i=length; i>0; i--) {
-        for (int j=0; j<=length-i; j++) {
-            if (isPalindromeString(str, j, j+i-1)) return str.substr(j, i);
+    string longestPalindrome(string str) {
+        pair<int, int> ans = { 0, 0 };
+        int n = str.length();
+        for (int i=0; i<n; i++) {
+            pair<int, int> p1 = util(str, i, i);
+            pair<int, int> p2 = util(str, i, i+1);
+            if (p1.second > ans.second) {
+                ans = p1;
+            }
+            if (p2.second > ans.second) {
+                ans = p2;
+            }
         }
+        return str.substr(ans.first, ans.second);
     }
-
-    return "";
-}
-
-*/
-
-// Solution is referenced from LeetCode
-
-string expand(string str, int i, int j) {
-    int left = i;
-    int right = j;
-    while (i >= 0 && j < str.length() && str[left] == str[right]) {
-        left --;
-        right ++;
-    }
-    return str.substr(left+1, right-left-1);
-}
-
-string longestPalindrome(string str) {
-    string ans = "";
-    for (int i=0; i<str.length(); i++) {
-        string odd = expand(str, i, i);
-        if (odd.length() > ans.length()) {
-            ans = odd;
-        }
-        string even = expand(str, i, i+1);
-        if (even.length() > ans.length()) {
-            ans = even;
-        }
-    }
-    return ans;
-}
+};
 
 int main() {
-    cout << longestPalindrome("babad");
 
     return 0;
 }
